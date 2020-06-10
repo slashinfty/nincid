@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap">
+    <link rel="stylesheet" href="index.css">
+    <script src="interface.js"></script>
+  </head>
+  <body>
+    <div id="settings-wrapper">
+      <div id="left-settings">
+        <div id="port">
+          <label for="port-select">Select Port: </label>
+          <select id="port-select">
+          </select>
+        </div>
+        <div id="console">
+          <label for="console-select">Select Console: </label>
+          <select id="console-select" onchange="disableAltConsole()">
+            <option value="nes">NES</option>
+            <option value="snes">SNES</option>
+            <option value="n64">Nintendo 64</option>
+            <option value="gcn">GameCube</option>
+          </select>
+        </div>
+        <div id="color">
+          <label for="color-select">Select Color: </label>
+          <select id="color-select">
+            <option value="blue">Blue</option>
+            <option value="brown">Brown</option>
+            <option value="console" id="console">Console</option>
+            <option value="console-alt" id="console-alt">Console (Alt)</option>
+            <option value="green">Green</option>
+            <option value="gray">Gray</option>
+            <option value="purple">Purple</option>
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+          </select>
+        </div>
+      </div>
+      <div id="right-settings">
+        <img src="../static/nincid.svg" width="235px">
+        <div id="information">
+          Version: <span id="version-number"></span><br>
+          <a href="https://github.com/slashinfty/nincid" target="_blank">Source Code</a> - <a href="https://github.com/slashinfty/nincid/issues" target="_blank">Report an Issue</a>
+        </div>
+        <button id="start-button">Load Input Display</button>
+      </div>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>

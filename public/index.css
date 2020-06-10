@@ -1,0 +1,42 @@
+html, body {
+    overflow: hidden !important;
+    color: white;
+    height: 441px;
+    width: 981px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+#settings-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98vw;
+    font-size: large;
+}
+#left-settings {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 95vh;
+    padding-left: 30px;
+}
+#right-settings {
+    flex-grow: 1;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#information {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+button, option, select {
+    font-size: large;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+a {
+    color: #49dfc3;
+}
