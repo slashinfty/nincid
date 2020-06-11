@@ -7,7 +7,8 @@
   "author": "Matt Braddock <matt.braddock@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder build"
   },
   "devDependencies": {
     "electron": "^9.0.3",
@@ -17,5 +18,28 @@
   "dependencies": {
     "@types/serialport": "^8.0.1",
     "serialport": "^9.0.0"
+  },
+  "build": {
+    "appId": "com.electron.nincid",
+    "productName": "NinCID",
+    "files": [
+      "node_modules/",
+      "public/",
+      "main/",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ]
+    }
   }
 }

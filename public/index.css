@@ -40,3 +40,6 @@ button, option, select {
 a {
     color: #49dfc3;
 }
+#scan-button {
+    display: none;
+}
