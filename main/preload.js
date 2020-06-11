@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let PortOptions = new DocumentFragment()
     SerialPort.list().then(ports => {
       ports.forEach(port => {
+        console.log(port);
         if (port.manufacturer != undefined) {
           const PortOptionElement = document.createElement('option')
           PortOptionElement.setAttribute('value', port.path)
