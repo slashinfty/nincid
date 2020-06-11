@@ -6,10 +6,14 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
-      webPreferences: {nodeIntegration: true, preload: path.join(__dirname, 'preload.js')},
+      webPreferences: {
+        nodeIntegration: true,
+        enableRemoteModule: true,
+        preload: path.join(__dirname, 'preload.js')
+      },
       title: 'NinCID',
-      height: 441,
-      width: 981,
+      height: 220,
+      width: 750,
       skipTaskbar: true,
       maximizable: false,
       resizable: false,

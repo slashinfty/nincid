@@ -1,5 +1,5 @@
 <p align="center">
-<img src="static/nincid.png"><br><br>
+<img src="docs/nincid.png"><br><br>
 A multiplatform Electron solution to <a href="https://github.com/jaburns/NintendoSpy">NintendoSpy</a>. Please see their repository for any and all setup of Arduino devices.
 </p>
 
