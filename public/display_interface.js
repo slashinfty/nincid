@@ -36,8 +36,43 @@ function loadDisplay() {
   activePort = new SerialPort(document.getElementById("port-select").value, {
     baudRate: 115200
   });
-  activePort.on('data', data => {
-    document.getElementById("down").style.visibility = data[0] === 0 ? "hidden" : "visible"
+
+  controllerDisplay(consoleName)
+  //activePort.on('data', data => {
+    //document.getElementById("down").style.visibility = data[0] === 0 ? "hidden" : "visible"
     //if(data[3] !== 0) console.log("A");
+  //})
+}
+
+function controllerDisplay(consol) {
+  const consoleObject = {
+    "nes": [
+
+    ],
+    "snes": [
+      {"button": "down", "input": 0},
+      {"button": "left", "input": 1},
+      {"button": "right", "input": 2},
+      {"button": "a", "input": 3},
+      {"button": "x", "input": 4},
+      {"button": "l", "input": 5},
+      {"button": "r", "input": 6},
+      {"button": "b", "input": 12},
+      {"button": "y", "input": 13},
+      {"button": "select", "input": 14},
+      {"button": "start", "input": 15},
+      {"button": "up", "input": 16}
+    ],
+    "n64": [
+
+    ],
+    "gcn": [
+
+    ]
+  }
+  activePort.on('data', data => {
+    consoleObject.consol.forEach(but => {
+      document.getElementById(but.button).style.visibility = data[but.input] === 0 ? "hidden" : "visible"
+    })
   })
 }
