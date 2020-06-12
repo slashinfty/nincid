@@ -7,7 +7,7 @@ function loadDisplay() {
   document.getElementById("settings-wrapper").style.display = "none"
   const consoleName = document.getElementById("console-select").value
   const color = document.getElementById("color-select").value
-  skinPath = consoleName === "sgb" ? path.join(__dirname, "../static/skins/nes") : path.join(__dirname, "../static/skins/", consoleName)
+  skinPath = path.join(__dirname, "../static/skins/", consoleName)
   const skinJson = require(`${skinPath}/skin.json`)
   const background = skinJson.background.find(skin => skin.name === color).image
   document.body.style.backgroundImage = "url(" + skinPath + "/" + background + ")"
