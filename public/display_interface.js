@@ -19,9 +19,12 @@ function loadDisplay() {
   win.setSize(skinJson.width, skinJson.height)
 
   // Set buttons in place
+  let buttonArray = [];
   const ButtonHolder = new DocumentFragment()
   skinJson.buttons.forEach(button => {
     const ButtonElement = document.createElement("img")
+    const buttonID = button.hasOwnProperty("name") ? button.name : button.xname.slice(0, -2)
+    ButtonElement.setAttribute("id", buttonID)
     ButtonElement.setAttribute("src", skinPath + "/" + button.image)
     const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
     ButtonElement.setAttribute("style", "position:fixed;left:" + button.x + "px;top:" + button.y + "px;visibility:hidden;" + widthHeight)
@@ -34,7 +37,7 @@ function loadDisplay() {
     baudRate: 115200
   });
   activePort.on('data', data => {
-    if(data[0] !== 0) console.log("down");
-    if(data[3] !== 0) console.log("A");
+    document.getElementById("down").style.visibility = data[0] === 0 ? "hidden" : "visible"
+    //if(data[3] !== 0) console.log("A");
   })
 }
