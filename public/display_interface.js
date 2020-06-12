@@ -45,33 +45,40 @@ function loadDisplay() {
 }
 
 function controllerDisplay(consol) {
-  const consoleObject = {
-    "nes": [
-
-    ],
-    "snes": [
-      {"button": "down", "input": 0},
-      {"button": "left", "input": 1},
-      {"button": "right", "input": 2},
-      {"button": "a", "input": 3},
-      {"button": "x", "input": 4},
-      {"button": "l", "input": 5},
-      {"button": "r", "input": 6},
-      {"button": "b", "input": 12},
-      {"button": "y", "input": 13},
-      {"button": "select", "input": 14},
-      {"button": "start", "input": 15},
-      {"button": "up", "input": 16}
-    ],
-    "n64": [
-
-    ],
-    "gcn": [
-
-    ]
-  }
+  const consoleObject = [
+    {
+      "name": "nes",
+      "buttons": []
+    },
+    {
+      "name": "snes",
+      "buttons": [
+        {"button": "down", "input": 0},
+        {"button": "left", "input": 1},
+        {"button": "right", "input": 2},
+        {"button": "a", "input": 3},
+        {"button": "x", "input": 4},
+        {"button": "l", "input": 5},
+        {"button": "r", "input": 6},
+        {"button": "b", "input": 12},
+        {"button": "y", "input": 13},
+        {"button": "select", "input": 14},
+        {"button": "start", "input": 15},
+        {"button": "up", "input": 16}
+      ]
+    },
+    {
+      "name": "n64",
+      "buttons": []
+    },
+    {
+      "name": "gcn",
+      "buttons": []
+    }
+  ]
+  const activeConsole = consoleObject.find(obj => obj.name === consol).buttons
   activePort.on('data', data => {
-    consoleObject.consol.forEach(but => {
+    activeConsole.forEach(but => {
       document.getElementById(but.button).style.visibility = data[but.input] === 0 ? "hidden" : "visible"
     })
   })
