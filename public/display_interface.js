@@ -19,6 +19,15 @@ function loadDisplay() {
   win.setSize(skinJson.width, skinJson.height)
 
   // Set buttons in place
+  const ButtonHolder = new DocumentFragment()
+  skinJson.buttons.forEach(button => {
+    const ButtonElement = document.createElement("img")
+    ButtonElement.setAttribute("src", skinPath + "/" + button.image)
+    const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
+    ButtonElement.setAttribute("style", "position:fixed;left:" + button.x + "px;top:" + button.y + "px;visibility:hidden;" + widthHeight)
+    ButtonHolder.appendChild(ButtonElement)
+  })
+  document.getElementById("buttons-container").appendChild(ButtonHolder)
 
   // Open port and start
   activePort = new SerialPort(document.getElementById("port-select").value, {
