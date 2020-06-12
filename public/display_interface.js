@@ -1,6 +1,4 @@
-const fs = require('fs');
 const path = require('path');
-const readline = require('readline');
 var activePort;
 var skinPath;
 
@@ -9,7 +7,7 @@ function loadDisplay() {
   document.getElementById("settings-wrapper").style.display = "none"
   const consoleName = document.getElementById("console-select").value
   const color = document.getElementById("color-select").value
-  skinPath = path.join(__dirname, "../static/skins/", consoleName)
+  skinPath = consoleName === "sgb" ? path.join(__dirname, "../static/skins/nes") : path.join(__dirname, "../static/skins/", consoleName)
   const skinJson = require(`${skinPath}/skin.json`)
   const background = skinJson.background.find(skin => skin.name === color).image
   document.body.style.backgroundImage = "url(" + skinPath + "/" + background + ")"
@@ -38,10 +36,6 @@ function loadDisplay() {
   });
 
   controllerDisplay(consoleName)
-  //activePort.on('data', data => {
-    //document.getElementById("down").style.visibility = data[0] === 0 ? "hidden" : "visible"
-    //if(data[3] !== 0) console.log("A");
-  //})
 }
 
 function controllerDisplay(consol) {
@@ -74,12 +68,27 @@ function controllerDisplay(consol) {
     {
       "name": "gcn",
       "buttons": []
+    },
+    {
+      "name": "sgb",
+      "buttons": [
+        {"button": "down", "input": 0},
+        {"button": "left", "input": 1},
+        {"button": "right", "input": 2},
+        {"button": "a", "input": 3},
+        {"button": "b", "input": 4},
+        {"button": "select", "input": 5},
+        {"button": "start", "input": 6},
+        {"button": "up", "input": 7}
+      ]
     }
   ]
+  
   const activeConsole = consoleObject.find(obj => obj.name === consol).buttons
   activePort.on('data', data => {
-    activeConsole.forEach(but => {
-      document.getElementById(but.button).style.visibility = data[but.input] === 0 ? "hidden" : "visible"
-    })
+    console.log(data);
+    //activeConsole.forEach(but => {
+      //document.getElementById(but.button).style.visibility = data[but.input] === 0 ? "hidden" : "visible"
+    //})
   })
 }
