@@ -16,10 +16,10 @@ git clone https://github.com/slashinfty/nincid.git && cd nincid
 # Install
 yarn install
 
-# chrome-sandbox permissions
+# If permissions are not set on chrome-sandbox when attempting to start
 sudo chown root node_modules/electron/dist/chrome-sandbox && sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
 
-# Rebuild bindings
+# If there is an error about bindings and node versions after starting
 rm yarn.lock && rm -rf node_modules/serialport node_modules/@serialport
 yarn install
 ./node_modules/.bin/electron-rebuild
