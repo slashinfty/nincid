@@ -1,4 +1,5 @@
 const path = require('path');
+const ByteLength = require('@serialport/parser-byte-length')
 var activePort;
 var skinPath;
 
@@ -42,28 +43,46 @@ function controllerDisplay(consol) {
   const consoleObject = [
     {
       "name": "nes",
+      "length": 9,
       "buttons": []
     },
     {
       "name": "snes",
+      "length": 17,
       "buttons": [
-        {"button": "down", "input": 0},
-        {"button": "left", "input": 1},
-        {"button": "right", "input": 2},
-        {"button": "a", "input": 3},
-        {"button": "x", "input": 4},
-        {"button": "l", "input": 5},
-        {"button": "r", "input": 6},
-        {"button": "b", "input": 12},
-        {"button": "y", "input": 13},
-        {"button": "select", "input": 14},
-        {"button": "start", "input": 15},
-        {"button": "up", "input": 16}
+        {"button": "b", "input": 0},
+        {"button": "y", "input": 1},
+        {"button": "select", "input": 2},
+        {"button": "start", "input": 3},
+        {"button": "up", "input": 4},
+        {"button": "down", "input": 5},
+        {"button": "left", "input": 6},
+        {"button": "right", "input": 7},
+        {"button": "a", "input": 8},
+        {"button": "x", "input": 9},
+        {"button": "l", "input": 10},
+        {"button": "r", "input": 11}
       ]
     },
     {
       "name": "n64",
-      "buttons": []
+      "length": 33,
+      "buttons": [
+        {"button": "a", "input": 0},
+        {"button": "b", "input": 1},
+        {"button": "z", "input": 2},
+        {"button": "start", "input": 3},
+        {"button": "up", "input": 4},
+        {"button": "down", "input": 5},
+        {"button": "left", "input": 6},
+        {"button": "right", "input": 7},
+        {"button": "l", "input": 10},
+        {"button": "r", "input": 11},
+        {"button": "cup", "input": 12},
+        {"button": "cdown", "input": 13},
+        {"button": "cleft", "input": 14},
+        {"button": "cright", "input": 15}
+      ]
     },
     {
       "name": "gcn",
@@ -72,23 +91,31 @@ function controllerDisplay(consol) {
     {
       "name": "sgb",
       "buttons": [
-        {"button": "down", "input": 0},
-        {"button": "left", "input": 1},
-        {"button": "right", "input": 2},
-        {"button": "a", "input": 3},
-        {"button": "b", "input": 4},
-        {"button": "select", "input": 5},
-        {"button": "start", "input": 6},
-        {"button": "up", "input": 7}
+        {"button": "a", "input": 0},
+        {"button": "b", "input": 1},
+        {"button": "select", "input": 2},
+        {"button": "start", "input": 3},
+        {"button": "up", "input": 4},
+        {"button": "down", "input": 5},
+        {"button": "left", "input": 6},
+        {"button": "right", "input": 7}
       ]
     }
   ]
   
-  const activeConsole = consoleObject.find(obj => obj.name === consol).buttons
-  activePort.on('data', data => {
+  const activeConsole = consoleObject.find(obj => obj.name === consol)
+  const consoleButtons = activeConsole.buttons
+  const parser = activePort.pipe(new ByteLength({length: activeConsole.length}))
+  parser.on('data', data => {
     console.log(data);
+    consoleButtons.forEach(but => {
+      document.getElementById(but.button).style.visibility = data[but.input] === 0 ? "hidden" : "visible"
+    })
+  })
+  //activePort.on('data', data => {
+    //console.log(data);
     //activeConsole.forEach(but => {
       //document.getElementById(but.button).style.visibility = data[but.input] === 0 ? "hidden" : "visible"
     //})
-  })
+  //})
 }
