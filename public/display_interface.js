@@ -93,7 +93,8 @@ function loadDisplay() {
     ButtonElement.setAttribute("id", buttonID)
     ButtonElement.setAttribute("src", skinPath + "/" + button.image)
     const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
-    ButtonElement.setAttribute("style", "position:fixed;left:" + button.x + "px;top:" + button.y + "px;visibility:hidden;" + widthHeight)
+    const vis = button.hasOwnProperty("range") ? "visibility:visible;" : "visibility:hidden;"
+    ButtonElement.setAttribute("style", "position:fixed;left:" + button.x + "px;top:" + button.y + "px;" + vis + widthHeight)
     ButtonHolder.appendChild(ButtonElement)
   })
   document.getElementById("buttons-container").appendChild(ButtonHolder)
@@ -106,6 +107,12 @@ function loadDisplay() {
   const activeConsole = consoleObject.find(obj => obj.name === consoleName)
   const consoleButtons = activeConsole.buttons
   const consoleSticks = activeConsole.hasOwnProperty('sticks') ? activeConsole.sticks : null
+  if (consoleSticks != null) { consoleSticks.forEach(stick => {
+    const el = document.getElementById(stick.stick)
+    stick.left = parseInt(el.style.left)
+    stick.top = parseInt(el.style.top)
+    stick.range = parseInt(skinJson.buttons.find(o => o.name === stick.stick).range)
+  })}
   const parser = activePort.pipe(new ByteLength({length: activeConsole.length}))
 
   /*
@@ -122,12 +129,12 @@ function loadDisplay() {
   }
   */
 
-  const isHighBit = (bit) => (bit & 0x0F !== 0);
+  const isHighBit = bit => bit & 0x0F !== 0
 
-  const stickRead = (bitArray) => {
+  const stickRead = bitArray => {
     let val = 0
-    for (let i = 1; i < 8; i += 1) { if (isHighBit(bitArray[i])) { val |= 1 << (7 - i) } }
-    return (isHighBit(bitArray[0]) ? (val - 128) : val) / 128;
+    for (let i = 1; i < 8; i++) { if (isHighBit(bitArray[i])) { val |= 1 << (7 - i) } }
+    return (isHighBit(bitArray[0]) ? (val - 128) : val) / 128
   };
 
   parser.on('data', data => {
@@ -135,10 +142,10 @@ function loadDisplay() {
     let offset = data.indexOf(10) + 1
     if (consoleSticks != null) {
       consoleSticks.forEach(stk => {
-        let xinput = stk.xinput + offset
-        let yinput = stk.yinput + offset
-        let x = stickRead(data.slice(xinput % data.length, (xinput + 8) % data.length))
-        let y = stickRead(data.slice(yinput % data.length, (yinput + 8) % data.length))
+        let x = stickRead(data.slice((stk.xinput + offset) % data.length, (stk.xinput + offset + 8) % data.length))
+        let y = stickRead(data.slice((stk.yinput + offset) % data.length, (stk.yinput + offset + 8) % data.length))
+        document.getElementById(stk.name).style.left = ((x * stick.range) + stick.left) + "px"
+        document.getElementById(stk.name).style.top = ((x * stick.range) + stick.top) + "px"
       })
     }
     consoleButtons.forEach(but => {

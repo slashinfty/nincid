@@ -8,7 +8,7 @@ A multiplatform Electron solution to <a href="https://github.com/jaburns/Nintend
 Soon!
 
 ## Skins
-Built-in skins are the minimalist versions of the NES, SNES, N64, and GameCube from [Proximity Sound](https://proximitysound.com/skins/).
+Built-in skins are the minimalist versions of the NES, SNES, N64, and GameCube from [Proximity Sound](https://proximitysound.com/skins/). There is an additional Super Game Boy console skin in the colors of the original Game Boy.
 
 Local skin compatibility is a work in progress.
 
