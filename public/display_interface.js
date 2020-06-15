@@ -7,7 +7,16 @@ const consoleObject = [
   {
     "name": "nes",
     "length": 9,
-    "buttons": []
+    "buttons": [
+      {"button": "a", "input": 0},
+      {"button": "b", "input": 1},
+      {"button": "select", "input": 2},
+      {"button": "start", "input": 3},
+      {"button": "up", "input": 4},
+      {"button": "down", "input": 5},
+      {"button": "left", "input": 6},
+      {"button": "right", "input": 7}
+    ]
   },
   {
     "name": "snes",
@@ -52,7 +61,24 @@ const consoleObject = [
   },
   {
     "name": "gcn",
-    "buttons": []
+    "length": 65,
+    "buttons": [
+      {"button": "start", "input": 3},
+      {"button": "y", "input": 4},
+      {"button": "x", "input": 5},
+      {"button": "b", "input": 6},
+      {"button": "a", "input": 7},
+      {"button": "l", "input": 9},
+      {"button": "r", "input": 10},
+      {"button": "z", "input": 11},
+      {"button": "up", "input": 12},
+      {"button": "down", "input": 13},
+      {"button": "right", "input": 14},
+      {"button": "left", "input": 15}
+    ],
+    "sticks": [
+      
+    ]
   },
   {
     "name": "sgb",
@@ -113,24 +139,9 @@ function loadDisplay() {
     stick.top = parseInt(el.style.top)
     stick.range = parseInt(skinJson.buttons.find(o => o.name === stick.stick).range)
   })}
-  const parser = activePort.pipe(new ByteLength({length: activeConsole.length}))
-
-  /*
-  let stickRead = bitArray => {
-    let byte = 0
-    bitArray.forEach((bit, index) => {
-      if (bit & 0x0F != 0) { byte |= 1 << (7 - index) }
-    })
-    console.log('byte: ' + byte)
-    byte = byte > 127 ? -1 * (256 - byte) : byte
-    console.log('signed: ' + byte)
-    console.log(parseFloat(byte / 128))
-    return parseFloat(byte / 128)
-  }
-  */
+  const parser = activePort.pipe(new ByteLength({ length: activeConsole.length }))
 
   const isHighBit = bit => bit & 0x0F !== 0
-
   const stickRead = bitArray => {
     let val = 0
     for (let i = 1; i < 8; i++) { if (isHighBit(bitArray[i])) { val |= 1 << (7 - i) } }
@@ -138,7 +149,6 @@ function loadDisplay() {
   };
 
   parser.on('data', data => {
-    //console.log(data);
     let offset = data.indexOf(10) + 1
     if (consoleSticks != null) {
       consoleSticks.forEach(stk => {
