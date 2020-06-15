@@ -144,8 +144,9 @@ function loadDisplay() {
       consoleSticks.forEach(stk => {
         let x = stickRead(data.slice((stk.xinput + offset) % data.length, (stk.xinput + offset + 8) % data.length))
         let y = stickRead(data.slice((stk.yinput + offset) % data.length, (stk.yinput + offset + 8) % data.length))
-        document.getElementById(stk.name).style.left = ((x * stick.range) + stick.left) + "px"
-        document.getElementById(stk.name).style.top = ((x * stick.range) + stick.top) + "px"
+        let el = document.getElementById(stk.stick)
+        el.style.left = ((x * stk.range) + stk.left) + "px"
+        el.style.top = (stk.top - (y * stk.range)) + "px"
       })
     }
     consoleButtons.forEach(but => {
