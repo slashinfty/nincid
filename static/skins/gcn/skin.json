@@ -40,18 +40,16 @@
     ],
     "buttons": [
         {
-            "name": "trig_l",
+            "name": "l",
             "image": "l.png",
             "x": "33",
-            "y": "30",
-            "direction": "left"
+            "y": "30"
         },
         {
-            "name": "trig_r",
+            "name": "r",
             "image": "r.png",
             "x": "607",
-            "y": "30",
-            "direction": "right"
+            "y": "30"
         },
         {
             "name": "b",
@@ -114,22 +112,18 @@
             "y": "306"
         },
         {
-            "xname": "lstick_x",
-            "yname": "lstick_y",
+            "name": "lstick",
             "image": "stick.png",
             "x": "117",
             "y": "137",
-            "xrange": "40",
-            "yrange": "40"
+            "range": "40"
         },
         {
-            "xname": "cstick_x",
-            "yname": "cstick_y",
+            "name": "cstick",
             "image": "c-stick.png",
             "x": "541",
             "y": "291",
-            "xrange": "30",
-            "yrange": "30"
+            "range": "30"
         }
     ]
 }

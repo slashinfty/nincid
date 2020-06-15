@@ -27,7 +27,7 @@ function createWindow () {
   win.loadFile('./public/index.html')
 
   // Open the DevTools.
-  if (isDevelopment) win.webContents.openDevTools()
+  //if (isDevelopment) win.webContents.openDevTools()
 
   // Links open in native browser.
   win.webContents.on('new-window', (event, url) => {

@@ -77,7 +77,8 @@ const consoleObject = [
       {"button": "left", "input": 15}
     ],
     "sticks": [
-      
+      {"stick": "lstick", "xinput": 16, "yinput": 24},
+      {"stick": "cstick", "xinput": 32, "yinput": 40}
     ]
   },
   {
@@ -115,7 +116,7 @@ function loadDisplay() {
   const ButtonHolder = new DocumentFragment()
   skinJson.buttons.forEach(button => {
     const ButtonElement = document.createElement("img")
-    const buttonID = button.name // fix gcn json
+    const buttonID = button.name
     ButtonElement.setAttribute("id", buttonID)
     ButtonElement.setAttribute("src", skinPath + "/" + button.image)
     const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
@@ -130,6 +131,7 @@ function loadDisplay() {
     baudRate: 115200
   });
 
+  // Prepare elements based on console
   const activeConsole = consoleObject.find(obj => obj.name === consoleName)
   const consoleButtons = activeConsole.buttons
   const consoleSticks = activeConsole.hasOwnProperty('sticks') ? activeConsole.sticks : null
@@ -139,21 +141,28 @@ function loadDisplay() {
     stick.top = parseInt(el.style.top)
     stick.range = parseInt(skinJson.buttons.find(o => o.name === stick.stick).range)
   })}
-  const parser = activePort.pipe(new ByteLength({ length: activeConsole.length }))
-
+  
+  // Functions for interpreting analog sticks
   const isHighBit = bit => bit & 0x0F !== 0
   const stickRead = bitArray => {
     let val = 0
-    for (let i = 1; i < 8; i++) { if (isHighBit(bitArray[i])) { val |= 1 << (7 - i) } }
-    return (isHighBit(bitArray[0]) ? (val - 128) : val) / 128
+    if (consoleName === 'n64') {
+      for (let i = 1; i < 8; i++) { if (isHighBit(bitArray[i])) { val |= 1 << (7 - i) } }
+      return (isHighBit(bitArray[0]) ? (val - 128) : val) * 0.0078125
+    } else {
+      for (let i = 0; i < 8; i++) { if (isHighBit(bitArray[i])) { val |= 1 << (7 - i) } }
+      return (val - 128) * 0.0078125
+    }
   };
 
+  // Read data from the port
+  const parser = activePort.pipe(new ByteLength({ length: activeConsole.length }))
   parser.on('data', data => {
     let offset = data.indexOf(10) + 1
     if (consoleSticks != null) {
       consoleSticks.forEach(stk => {
-        let x = stickRead(data.slice((stk.xinput + offset) % data.length, (stk.xinput + offset + 8) % data.length))
-        let y = stickRead(data.slice((stk.yinput + offset) % data.length, (stk.yinput + offset + 8) % data.length))
+        let x = stickRead(Array.from({ length: 8 }, (_, i) => data[((stk.xinput + offset) % data.length) + i]))
+        let y = stickRead(Array.from({ length: 8 }, (_, i) => data[((stk.yinput + offset) % data.length) + i]))
         let el = document.getElementById(stk.stick)
         el.style.left = ((x * stk.range) + stk.left) + "px"
         el.style.top = (stk.top - (y * stk.range)) + "px"
