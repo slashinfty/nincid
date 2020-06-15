@@ -1,7 +1,7 @@
 <p align="center">
 <img src="docs/nincid.png"><br><br>
 A multiplatform Electron solution to <a href="https://github.com/jaburns/NintendoSpy">NintendoSpy</a>. Please see their repository for any and all setup of Arduino devices.<br>
-Source code for NinCID is available on <a href="https://github.com/slashinft/nincid">GitHub</a>.
+Source code for NinCID is available on <a href="https://github.com/slashinfty/nincid">GitHub</a>.
 </p>
 
 ## Releases
