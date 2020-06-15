@@ -106,13 +106,11 @@
             "y": "167"
         },
         {
-            "xname": "stick_x",
-            "yname": "stick_y",
+            "name": "stick",
             "image": "circle.png",
             "x": "332",
             "y": "255",
-            "xrange": "40",
-            "yrange": "40",
+            "range": "40",
             "width": "92",
             "height": "92"
         },
