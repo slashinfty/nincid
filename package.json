@@ -9,7 +9,8 @@
   "scripts": {
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
-    "build": "electron-builder -wl"
+    "build": "electron-builder -wl",
+    "build-mac": "electron-builder -m"
   },
   "devDependencies": {
     "electron": "^9.0.3",
@@ -41,6 +42,7 @@
     },
     "mac": {
       "category": "public.app-category.games",
+      "icon": "assets/icon_512x512.png",
       "target": "dmg"
     },
     "linux": {
