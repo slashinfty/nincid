@@ -14,7 +14,6 @@ function createWindow () {
       title: 'NinCID',
       height: 220,
       width: 750,
-      skipTaskbar: true,
       maximizable: false,
       resizable: false,
       backgroundColor: '#000'
