@@ -14,7 +14,7 @@ Current Version: 0.1.1
 
 Note: when launching the .AppImage, add the option `--no-sandbox`
 
-Changelog can be found on [changelog.md](GitHub).
+Changelog can be found on [GitHub](changelog.md).
 
 ## Skins
 Built-in skins are the minimalist versions of the NES, SNES, N64, and GameCube from [Proximity Sound](https://proximitysound.com/skins/). There is an additional Super Game Boy console skin in the colors of the original Game Boy.
