@@ -8,7 +8,6 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "postinstall": "electron-builder install-app-deps",
     "build": "electron-builder -wl",
     "build-mac": "electron-builder -m"
   },
