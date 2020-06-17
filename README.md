@@ -39,6 +39,12 @@ Custom skins require a `skin.json` in the format below with all corresponding im
       "height": "30",
       "width": "30",
       "range": "35"
+    },
+    {
+      "name": "different button",
+      "image": "another.png",
+      "x": "410",
+      "y": "175"
     }
   ]
 }
