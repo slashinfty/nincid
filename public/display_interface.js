@@ -1,6 +1,6 @@
 const path = require('path');
 const ByteLength = require('@serialport/parser-byte-length')
-const { dialog } = require('electron')
+const { dialog } = require('electron').remote
 const fs = require('fs')
 var activePort;
 var skinPath;
@@ -79,7 +79,7 @@ const consoleObject = [
       {"button": "left", "input": 15}
     ],
     "sticks": [
-      {"stick": "lstick", "xinput": 16, "yinput": 24},
+      {"stick": "stick", "xinput": 16, "yinput": 24},
       {"stick": "cstick", "xinput": 32, "yinput": 40}
     ]
   },
@@ -137,13 +137,16 @@ function loadDisplay() {
 
 function customSkin() {
   // Open dialog to select directory.
+  const win = require("electron").remote.getCurrentWindow();
   const dir = dialog.showOpenDialogSync({
     "title": "Select Custom Skin Directory",
     "properties": [
       "openDirectory"
     ]
-  })
+  })[0]
   const jsonPath = path.join(dir, "skin.json")
+  let success = false
+  let winSize = []
   if (!fs.existsSync(jsonPath)) {
     dialog.showErrorBox("Error Loading Custom Skin", "Can not find " + jsonPath)
   } else {
@@ -152,27 +155,38 @@ function customSkin() {
       document.getElementById("settings-wrapper").style.display = "none"
       let rawSkinData = fs.readFileSync(jsonPath)
       let skinJson = JSON.parse(rawSkinData)
+      const allowedConsoles = ["nes", "snes", "n64", "gcn", "sgb"]
+      if (!skinJson.hasOwnProperty("console") || !allowedConsoles.includes(skinJson.console)) throw "missing/incorrect console"
+      if (!skinJson.hasOwnProperty("background")) throw "missing background"
       const background = skinJson.background
-      document.body.style.backgroundImage = "url(" + skinPath + "/" + background + ")"
+      document.body.style.backgroundImage = "url(" + dir + "/" + background + ")"
 
       // Resize window based on height/width in object.
-      const win = require("electron").remote.BrowserWindow.getFocusedWindow();
+      if (!skinJson.hasOwnProperty("width") || !skinJson.hasOwnProperty("height")) throw "missing height/width"
+      winSize.push(skinJson.width)
+      winSize.push(skinJson.height)
       win.setSize(skinJson.width, skinJson.height)
+      /*document.body.style.height = skinJson.height
+      document.body.style.width = skinJson.width*/
 
       // Set buttons in place.
+      const allowedButtons = ["a", "b", "x", "y", "z", "l", "r", "start", "select", "up", "down", "left", "right", "stick", "cup", "cdown", "cleft", "cright", "cstick"]
       const ButtonHolder = new DocumentFragment()
       skinJson.buttons.forEach(button => {
+        if (!allowedButtons.includes(button.name)) throw button.name + " is not a valid button name."
         const ButtonElement = document.createElement("img")
         const buttonID = button.name
         ButtonElement.setAttribute("id", buttonID)
+        if (!button.hasOwnProperty("image") || !fs.existsSync(dir + "/" + button.image)) throw "no image"
         ButtonElement.setAttribute("src", dir + "/" + button.image)
         const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
         const vis = button.hasOwnProperty("range") ? "visibility:visible;" : "visibility:hidden;"
+        if (!button.hasOwnProperty("x") || !button.hasOwnProperty("y")) throw "missing x/y coordinates for " + button.name
         ButtonElement.setAttribute("style", "position:fixed;left:" + button.x + "px;top:" + button.y + "px;" + vis + widthHeight)
         ButtonHolder.appendChild(ButtonElement)
       })
       document.getElementById("buttons-container").appendChild(ButtonHolder)
-
+      success = true
       // Open port and start.
       port = new SerialPort(document.getElementById("port-select").value, {
         baudRate: 115200
@@ -180,16 +194,20 @@ function customSkin() {
 
       readPort(port, skinJson.console)
     } catch (error) {
+      // Display the error message
+      dialog.showErrorBox("Error Loading Custom Skin", error.toString())
       // Set background to black and put up settings
       document.body.style.backgroundImage = "none"
-      document.getElementById("settings-wrapper").style.display = "block"
+      document.getElementById("settings-wrapper").style.removeProperty("display")
       // Remove all buttons and sticks
       document.getElementById("buttons-container").innerHTML = ""
-      // Resize window back to original size
-      const win = require("electron").remote.BrowserWindow.getFocusedWindow();
-      win.setSize(750, 275)
-      // Display the error message
-      dialog.showErrorBox("Error Loading Custom Skin", error)
+    } finally {
+      console.log(winSize)
+      /*if (success) {
+        win.setSize(winSize[0], winSize[1])
+      } else {
+        win.setSize(750, 275)
+      }*/
     }
   }
 }
