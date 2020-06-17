@@ -12,7 +12,7 @@ function createWindow () {
         preload: path.join(__dirname, 'preload.js')
       },
       title: 'NinCID',
-      height: 220,
+      height: 275,
       width: 750,
       maximizable: false,
       resizable: false,

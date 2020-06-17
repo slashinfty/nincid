@@ -25,7 +25,7 @@ function scanPorts() {
     document.getElementById("port-select").appendChild(PortOptions)
     if (document.getElementById("port-select").length != 0) {
       document.getElementById("scan-button").style.display = "none"
-      document.getElementById("start-button").style.display = "blocK"
+      document.getElementById("load-buttons").style.display = "block"
     }
   })
 }

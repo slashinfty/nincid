@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     document.getElementById("port-select").appendChild(PortOptions)
     if (document.getElementById("port-select").length === 0) {
-      document.getElementById("start-button").style.display = "none"
+      document.getElementById("load-buttons").style.display = "none"
       document.getElementById("scan-button").style.display = "blocK"
     }
   })

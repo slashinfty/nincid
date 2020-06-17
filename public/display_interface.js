@@ -1,5 +1,7 @@
 const path = require('path');
 const ByteLength = require('@serialport/parser-byte-length')
+const { dialog } = require('electron')
+const fs = require('fs')
 var activePort;
 var skinPath;
 
@@ -98,21 +100,20 @@ const consoleObject = [
 ]
 
 function loadDisplay() {
-  // Get settings, find JSON, load background.
+  // Get settings, find object, load background.
   document.getElementById("settings-wrapper").style.display = "none"
-  const consoleName = document.getElementById("console-select").value
+  const consul = document.getElementById("console-select").value
   const color = document.getElementById("color-select").value
-  skinPath = path.join(__dirname, "../static/skins/", consoleName)
+  skinPath = path.join(__dirname, "../static/skins/", consul)
   const skinJson = require(`${skinPath}/skin.json`)
   const background = skinJson.background.find(skin => skin.name === color).image
   document.body.style.backgroundImage = "url(" + skinPath + "/" + background + ")"
   
-  // Resize window based on height/width in JSON.
+  // Resize window based on height/width in object.
   const win = require("electron").remote.BrowserWindow.getFocusedWindow();
   win.setSize(skinJson.width, skinJson.height)
 
-  // Set buttons in place
-  let buttonArray = [];
+  // Set buttons in place.
   const ButtonHolder = new DocumentFragment()
   skinJson.buttons.forEach(button => {
     const ButtonElement = document.createElement("img")
@@ -126,12 +127,74 @@ function loadDisplay() {
   })
   document.getElementById("buttons-container").appendChild(ButtonHolder)
 
-  // Open port and start
-  activePort = new SerialPort(document.getElementById("port-select").value, {
+  // Open port and start.
+  port = new SerialPort(document.getElementById("port-select").value, {
     baudRate: 115200
   });
 
-  // Prepare elements based on console
+  readPort(port, consul)
+}
+
+function customSkin() {
+  // Open dialog to select directory.
+  const dir = dialog.showOpenDialogSync({
+    "title": "Select Custom Skin Directory",
+    "properties": [
+      "openDirectory"
+    ]
+  })
+  const jsonPath = path.join(dir, "skin.json")
+  if (!fs.existsSync(jsonPath)) {
+    dialog.showErrorBox("Error Loading Custom Skin", "Can not find " + jsonPath)
+  } else {
+    try {
+      // Get settings and load background.
+      document.getElementById("settings-wrapper").style.display = "none"
+      let rawSkinData = fs.readFileSync(jsonPath)
+      let skinJson = JSON.parse(rawSkinData)
+      const background = skinJson.background
+      document.body.style.backgroundImage = "url(" + skinPath + "/" + background + ")"
+
+      // Resize window based on height/width in object.
+      const win = require("electron").remote.BrowserWindow.getFocusedWindow();
+      win.setSize(skinJson.width, skinJson.height)
+
+      // Set buttons in place.
+      const ButtonHolder = new DocumentFragment()
+      skinJson.buttons.forEach(button => {
+        const ButtonElement = document.createElement("img")
+        const buttonID = button.name
+        ButtonElement.setAttribute("id", buttonID)
+        ButtonElement.setAttribute("src", dir + "/" + button.image)
+        const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
+        const vis = button.hasOwnProperty("range") ? "visibility:visible;" : "visibility:hidden;"
+        ButtonElement.setAttribute("style", "position:fixed;left:" + button.x + "px;top:" + button.y + "px;" + vis + widthHeight)
+        ButtonHolder.appendChild(ButtonElement)
+      })
+      document.getElementById("buttons-container").appendChild(ButtonHolder)
+
+      // Open port and start.
+      port = new SerialPort(document.getElementById("port-select").value, {
+        baudRate: 115200
+      });
+
+      readPort(port, skinJson.console)
+    } catch (error) {
+      // Set background to black
+      document.body.style.backgroundImage = "none"
+      // Remove all buttons and sticks
+      document.getElementById("buttons-container").innerHTML = ""
+      // Resize window back to original size
+      const win = require("electron").remote.BrowserWindow.getFocusedWindow();
+      win.setSize(750, 275)
+      // Display the error message
+      dialog.showErrorBox("Error Loading Custom Skin", error)
+    }
+  }
+}
+
+function readPort(activePort, consoleName) {
+  // Prepare elements based on console.
   const activeConsole = consoleObject.find(obj => obj.name === consoleName)
   const consoleButtons = activeConsole.buttons
   const consoleSticks = activeConsole.hasOwnProperty('sticks') ? activeConsole.sticks : null
@@ -142,7 +205,7 @@ function loadDisplay() {
     stick.range = parseInt(skinJson.buttons.find(o => o.name === stick.stick).range)
   })}
   
-  // Functions for interpreting analog sticks
+  // Functions for interpreting analog sticks.
   const isHighBit = bit => bit & 0x0F !== 0
   const stickRead = bitArray => {
     let val = 0
@@ -155,7 +218,7 @@ function loadDisplay() {
     }
   };
 
-  // Read data from the port
+  // Read data from the port.
   const parser = activePort.pipe(new ByteLength({ length: activeConsole.length }))
   parser.on('data', data => {
     let offset = data.indexOf(10) + 1
