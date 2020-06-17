@@ -6,21 +6,45 @@ Source code for NinCID is available on <a href="https://github.com/slashinfty/ni
 
 ## Releases
 
-Current Version: 0.1.1
+Current Version: 0.2.0
 
-<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID_Setup_0.1.1.exe">Windows (.exe)</a><br>
-<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.1.1.dmg">Mac (.dmg)</a><br>
-<a href="https://github.com/slashinfty/nincid/releases/latest/download/nincid_0.1.1_amd64.deb">Linux (.deb)</a><br>
-<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.1.1.AppImage">Linux (.AppImage)</a>
+<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID_Setup_0.2.0.exe">Windows (.exe)</a><br>
+<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.2.0.dmg">Mac (.dmg)</a><br>
+<a href="https://github.com/slashinfty/nincid/releases/latest/download/nincid_0.2.0_amd64.deb">Linux (.deb)</a><br>
+<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.2.0.AppImage">Linux (.AppImage)</a>
 
 Note: when launching the .AppImage, add the option `--no-sandbox`
 
-Changelog can be found on [GitHub](changelog.md).
+View the [Changelog](changelog.md).
 
 ## Skins
 Built-in skins are the minimalist versions of the NES, SNES, N64, and GameCube from [Proximity Sound](https://proximitysound.com/skins/). There is an additional Super Game Boy console skin in the colors of the original Game Boy.
 
-Local skin compatibility is a work in progress.
+Custom skins require a `skin.json` in the format below with all corresponding images in a single folder (select the folder when loading the custom skin).
+
+```json
+{
+  "name": "name of skin",
+  "author": "name of author",
+  "console": "nes",
+  "height": 441,
+  "width": 981,
+  "background": "back.png",
+  "buttons": [
+    {
+      "name": "button name",
+      "image": "button.png",
+      "x": "200",
+      "y": "150",
+      "height": "30",
+      "width": "30",
+      "range": "35"
+    }
+  ]
+}
+```
+
+Name and author are optional. Console must be `nes`, `snes`, `n64`, `gcn`, or `sgb`. Height and width are mandatory, and should match the background image's dimensions. For buttons, name must be one of the following (corresponding to the button): `a, b, x, y, z, l, r, start, select, up, down, left, right, stick, cup, cdown, cleft, cright, cstick`. Image, x, and y are mandatory. Height and width are optional, but allow you to reuse the same image for multiple buttons of different sizes. Range is mandatory for analog sticks, and not allowed for buttons.
 
 ## Cloning
 ```bash

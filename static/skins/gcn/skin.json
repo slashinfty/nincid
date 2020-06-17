@@ -112,7 +112,7 @@
             "y": "306"
         },
         {
-            "name": "lstick",
+            "name": "stick",
             "image": "stick.png",
             "x": "117",
             "y": "137",

@@ -8,13 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (port.manufacturer != undefined) {
         const PortOptionElement = document.createElement('option')
         PortOptionElement.setAttribute('value', port.path)
-        PortOptionElement.innerText = port.path + ' - ' + port.manufacturer
+        PortOptionElement.innerText = port.path
         PortOptions.appendChild(PortOptionElement)
       }
     })
     document.getElementById("port-select").appendChild(PortOptions)
     if (document.getElementById("port-select").length === 0) {
-      document.getElementById("start-button").style.display = "none"
+      document.getElementById("load-buttons").style.display = "none"
       document.getElementById("scan-button").style.display = "blocK"
     }
   })

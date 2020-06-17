@@ -12,8 +12,8 @@ function createWindow () {
         preload: path.join(__dirname, 'preload.js')
       },
       title: 'NinCID',
-      height: 220,
-      width: 750,
+      height: 275,
+      width: 500,
       maximizable: false,
       resizable: false,
       backgroundColor: '#000'
@@ -26,7 +26,7 @@ function createWindow () {
   win.loadFile('./public/index.html')
 
   // Open the DevTools.
-  //if (isDevelopment) win.webContents.openDevTools()
+  if (isDevelopment) win.webContents.openDevTools()
 
   // Links open in native browser.
   win.webContents.on('new-window', (event, url) => {
