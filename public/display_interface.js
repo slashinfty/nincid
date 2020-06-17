@@ -180,8 +180,9 @@ function customSkin() {
 
       readPort(port, skinJson.console)
     } catch (error) {
-      // Set background to black
+      // Set background to black and put up settings
       document.body.style.backgroundImage = "none"
+      document.getElementById("settings-wrapper").style.display = "block"
       // Remove all buttons and sticks
       document.getElementById("buttons-container").innerHTML = ""
       // Resize window back to original size
