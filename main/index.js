@@ -30,6 +30,9 @@ function createWindow () {
     event.preventDefault()
     shell.openExternal(url)
   })
+
+  // Uncomment next line to enable dev tools.
+  win.webContents.openDevTools()
 }
 
 app.allowRendererProcessReuse = false

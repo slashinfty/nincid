@@ -2,7 +2,6 @@ const path = require('path');
 const ByteLength = require('@serialport/parser-byte-length')
 const { dialog } = require('electron').remote
 const fs = require('fs')
-var activePort;
 var skinPath;
 
 const consoleObject = [
@@ -101,7 +100,6 @@ const consoleObject = [
 
 function loadDisplay() {
   // Get settings, find object, load background.
-  showReturnToSetup = true
   document.getElementById("settings-wrapper").style.display = "none"
   const consul = document.getElementById("console-select").value
   const color = document.getElementById("color-select").value
@@ -181,9 +179,10 @@ function customSkin() {
         ButtonHolder.appendChild(ButtonElement)
       })
       document.getElementById("buttons-container").appendChild(ButtonHolder)
-      showReturnToSetup = true
+  
+
       // Open port and start.
-      port = new SerialPort(document.getElementById("port-select").value, {
+      let port = new SerialPort(document.getElementById("port-select").value, {
         baudRate: 115200
       });
       readPort(port, skinJson.console)
@@ -196,7 +195,6 @@ function customSkin() {
       win.setSize(750, 275)
       // Remove all buttons and sticks
       document.getElementById("buttons-container").innerHTML = ""
-      showReturnToSetup = false
     }
   }
 }
