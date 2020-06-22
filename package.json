@@ -1,6 +1,6 @@
 {
   "name": "nincid",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "cross platform nintendo controller input display",
   "main": "main/index.js",
   "repository": "git@github.com:slashinfty/nincid.git",
@@ -9,7 +9,8 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder -wl",
-    "build-mac": "electron-builder -m"
+    "build-mac": "electron-builder -m",
+    "build-win-only": "electron-builder -w"
   },
   "devDependencies": {
     "electron": "^9.0.3",

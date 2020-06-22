@@ -101,6 +101,7 @@ const consoleObject = [
 
 function loadDisplay() {
   // Get settings, find object, load background.
+  showReturnToSetup = true
   document.getElementById("settings-wrapper").style.display = "none"
   const consul = document.getElementById("console-select").value
   const color = document.getElementById("color-select").value
@@ -145,8 +146,6 @@ function customSkin() {
     ]
   })[0]
   const jsonPath = path.join(dir, "skin.json")
-  let success = false
-  let winSize = []
   if (!fs.existsSync(jsonPath)) {
     dialog.showErrorBox("Error Loading Custom Skin", "Can not find " + jsonPath)
   } else {
@@ -163,11 +162,7 @@ function customSkin() {
 
       // Resize window based on height/width in object.
       if (!skinJson.hasOwnProperty("width") || !skinJson.hasOwnProperty("height")) throw "missing height/width"
-      winSize.push(skinJson.width)
-      winSize.push(skinJson.height)
       win.setSize(skinJson.width, skinJson.height)
-      /*document.body.style.height = skinJson.height
-      document.body.style.width = skinJson.width*/
 
       // Set buttons in place.
       const allowedButtons = ["a", "b", "x", "y", "z", "l", "r", "start", "select", "up", "down", "left", "right", "stick", "cup", "cdown", "cleft", "cright", "cstick"]
@@ -186,12 +181,11 @@ function customSkin() {
         ButtonHolder.appendChild(ButtonElement)
       })
       document.getElementById("buttons-container").appendChild(ButtonHolder)
-      success = true
+      showReturnToSetup = true
       // Open port and start.
       port = new SerialPort(document.getElementById("port-select").value, {
         baudRate: 115200
       });
-
       readPort(port, skinJson.console)
     } catch (error) {
       // Display the error message
@@ -199,15 +193,10 @@ function customSkin() {
       // Set background to black and put up settings
       document.body.style.backgroundImage = "none"
       document.getElementById("settings-wrapper").style.removeProperty("display")
+      win.setSize(750, 275)
       // Remove all buttons and sticks
       document.getElementById("buttons-container").innerHTML = ""
-    } finally {
-      console.log(winSize)
-      /*if (success) {
-        win.setSize(winSize[0], winSize[1])
-      } else {
-        win.setSize(750, 275)
-      }*/
+      showReturnToSetup = false
     }
   }
 }

@@ -1,41 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="81.767761mm"
-   height="17.9832mm"
-   viewBox="0 0 81.767761 17.9832"
-   version="1.1"
    id="svg8"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="nincid.svg">
+   version="1.1"
+   viewBox="0 0 81.767761 17.9832"
+   height="17.9832mm"
+   width="81.767761mm">
   <defs
      id="defs2" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.62"
-     inkscape:cx="19.281145"
-     inkscape:cy="-84.189771"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1021"
-     inkscape:window-x="0"
-     inkscape:window-y="32"
-     inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -44,25 +20,41 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-20.168809,-108.19695)">
-    <text
-       xml:space="preserve"
+     transform="translate(-20.168809,-108.19695)"
+     id="layer1">
+    <g
+       id="text817"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.39999962px;line-height:1.25;font-family:Quantum;-inkscape-font-specification:Quantum;letter-spacing:0px;word-spacing:0px;fill:#49dfc3;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="18.898809"
-       y="126.15475"
-       id="text817"><tspan
-         sodipodi:role="line"
-         id="tspan815"
-         x="18.898809"
-         y="126.15475"
-         style="fill:#49dfc3;fill-opacity:1;stroke-width:0.26458332">NinCID</tspan></text>
+       aria-label="NinCID">
+      <path
+         id="path9"
+         style="fill:#49dfc3;fill-opacity:1;stroke-width:0.26458332"
+         d="m 20.168809,126.15475 h 4.318 v -5.715 l -4.318,-4.318 z m 11.8618,-13.716 -0.1016,0.1016 v 7.2644 l -10.9728,-10.9728 -0.1016,-0.1016 h -0.6858 v 5.4356 l 4.318,4.318 2.7686,2.7686 4.7498,4.7498 0.1778,0.1778 h 4.064 v -17.9578 z" />
+      <path
+         id="path11"
+         style="fill:#49dfc3;fill-opacity:1;stroke-width:0.26458332"
+         d="m 37.780138,113.86115 v 1.524 l 3.047999,3.048 v -4.572 z m 0,12.2936 h 3.047999 v -6.35 l -3.047999,-3.048 z" />
+      <path
+         id="path13"
+         style="fill:#49dfc3;fill-opacity:1;stroke-width:0.26458332"
+         d="m 43.385997,126.15475 h 3.048 v -4.0132 l -3.048,-3.048 z m 8.3566,-9.6774 -0.0762,0.0762 v 5.1054 l -7.747,-7.747 -0.0762,-0.0762 h -0.4826 v 3.8354 l 3.048,3.048 1.9558,1.9558 3.3528,3.3528 0.127,0.127 h 2.8702 v -12.6492 z" />
+      <path
+         id="path15"
+         style="fill:#49dfc3;fill-opacity:1;stroke-width:0.26458332"
+         d="m 62.20422,115.15655 c 0.2286,-0.4318 0.508,-0.8382 0.8636,-1.1938 0.8636,-0.8636 2.0066,-1.3462 3.2258,-1.3462 1.2192,0 2.3622,0.4826 3.2258,1.3462 0.4318,0.4318 0.762,0.9144 0.9906,1.4732 l 0.1016,0.2032 h 4.572 l -0.1016,-0.4318 c -0.4318,-1.9558 -1.524,-3.7338 -3.0988,-5.0038 -1.6002,-1.2954 -3.6068,-2.0066 -5.6642,-2.0066 -2.9464,0 -5.715,1.4478 -7.3914,3.8608 l -0.1778,0.2286 3.2766,3.2766 z m 8.2804,3.7338 c -0.2286,0.5588 -0.5588,1.0414 -0.9906,1.4732 -0.3556,0.3556 -0.762,0.635 -1.1938,0.8636 -0.127,0.0762 -0.254,0.127 -0.4064,0.1778 -0.4318,0.1524 -0.889,0.254 -1.3462,0.2794 -0.2032,0 -0.4318,0 -0.635,-0.0254 -1.0668,-0.0762 -2.0828,-0.5334 -2.8448,-1.2954 -0.762,-0.762 -1.2192,-1.778 -1.2954,-2.8448 v -0.127 l -3.7592,-3.7592 -0.1778,0.5334 c -0.3302,0.9652 -0.508,1.9812 -0.508,2.9972 0,2.3876 0.9398,4.6482 2.6416,6.35 1.7018,1.7018 3.9624,2.6416 6.35,2.6416 1.2192,0 2.3876,-0.2286 3.5052,-0.6858 0.2032,-0.0762 0.4064,-0.1778 0.6096,-0.2794 1.143,-0.5842 2.1844,-1.4478 2.9718,-2.4638 0.8128,-1.0414 1.397,-2.2606 1.6764,-3.5306 l 0.1016,-0.4318 h -4.572 z" />
+      <path
+         id="path17"
+         style="fill:#49dfc3;fill-opacity:1;stroke-width:0.26458332"
+         d="m 77.666074,108.70495 v 2.159 l 4.318,4.318 v -6.477 z m 0,17.4498 h 4.318 v -8.9916 l -4.318,-4.318 z" />
+      <path
+         id="path19"
+         style="fill:#49dfc3;fill-opacity:1;stroke-width:0.26458332"
+         d="m 100.33637,112.46415 c 0,0 0,0 0,0 -1.6256,-2.3368 -4.2926,-3.7338 -7.1374,-3.7338 h -8.6868 v 4.953 l 4.3434,4.3434 v -4.9276 h 4.3434 c 1.4224,0 2.7432,0.7112 3.556,1.8796 0,0 0,0 0,0 0.508,0.7366 0.762,1.6002 0.762,2.4892 0,0.889 -0.254,1.7526 -0.7366,2.4892 0,0 0,0 0,0.0254 -0.762,1.0922 -1.9558,1.778 -3.2766,1.8542 -0.1016,0 -0.2032,0 -0.3048,0 h -4.3434 v -1.8542 l -4.3434,-4.3434 v 10.541 h 8.6868 c 2.8448,0 5.5118,-1.397 7.1374,-3.7338 0.0254,-0.0254 0.0508,-0.0508 0.0762,-0.0762 0.9906,-1.4478 1.524,-3.1496 1.524,-4.9022 0,-1.778 -0.5334,-3.4798 -1.524,-4.9276 z" />
+    </g>
   </g>
 </svg>
