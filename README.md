@@ -66,7 +66,9 @@ sudo chown root node_modules/electron/dist/chrome-sandbox && sudo chmod 4755 nod
 # If there is an error about bindings and node versions after starting
 rm yarn.lock && rm -rf node_modules/serialport node_modules/@serialport
 yarn install
-./node_modules/.bin/electron-rebuild
+./node_modules/.bin/electron-rebuild # For Linux/Mac
+# For Windows:
+# .\node_modules\.bin\electron-rebuild.cmd 
 
 # Start
 yarn start

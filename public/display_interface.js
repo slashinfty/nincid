@@ -110,6 +110,7 @@ function loadDisplay() {
   
   // Resize window based on height/width in object.
   const win = require("electron").remote.BrowserWindow.getFocusedWindow();
+  win.setMinimumSize(skinJson.width, skinJson.height)
   win.setSize(skinJson.width, skinJson.height)
 
   // Set buttons in place.
@@ -160,6 +161,7 @@ function customSkin() {
 
       // Resize window based on height/width in object.
       if (!skinJson.hasOwnProperty("width") || !skinJson.hasOwnProperty("height")) throw "missing height/width"
+      win.setMinimumSize(skinJson.width, skinJson.height)
       win.setSize(skinJson.width, skinJson.height)
 
       // Set buttons in place.
@@ -192,6 +194,7 @@ function customSkin() {
       // Set background to black and put up settings
       document.body.style.backgroundImage = "none"
       document.getElementById("settings-wrapper").style.removeProperty("display")
+      win.setMinimumSize(750, 275)
       win.setSize(750, 275)
       // Remove all buttons and sticks
       document.getElementById("buttons-container").innerHTML = ""
