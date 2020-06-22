@@ -18,7 +18,7 @@ function scanPorts() {
       if (port.manufacturer != undefined) {
         const PortOptionElement = document.createElement('option')
         PortOptionElement.setAttribute('value', port.path)
-        PortOptionElement.innerText = port.path + ' - ' + port.manufacturer
+        PortOptionElement.innerText = port.path
         PortOptions.appendChild(PortOptionElement)
       }
     })

@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "@types/serialport": "^8.0.1",
-    "serialport": "^9.0.0"
+    "serialport": "^9.0.0",
+    "upath": "^1.2.0"
   },
   "build": {
     "appId": "com.electron.nincid",

@@ -1,4 +1,4 @@
-const path = require('path');
+const upath = require('upath');
 const ByteLength = require('@serialport/parser-byte-length')
 const { dialog } = require('electron').remote
 const fs = require('fs')
@@ -103,10 +103,11 @@ function loadDisplay() {
   document.getElementById("settings-wrapper").style.display = "none"
   const consul = document.getElementById("console-select").value
   const color = document.getElementById("color-select").value
-  skinPath = path.join(__dirname, "../static/skins/", consul)
+  skinPath = upath.toUnix(upath.join(__dirname, "../static/skins/", consul))
   const skinJson = require(`${skinPath}/skin.json`)
   const background = skinJson.background.find(skin => skin.name === color).image
-  document.body.style.backgroundImage = "url(" + skinPath + "/" + background + ")"
+  const backPath = upath.toUnix(upath.join(skinPath, background))
+  document.body.style.backgroundImage = "url(" + backPath + ")"
   
   // Resize window based on height/width in object.
   const win = require("electron").remote.BrowserWindow.getFocusedWindow();
@@ -119,7 +120,8 @@ function loadDisplay() {
     const ButtonElement = document.createElement("img")
     const buttonID = button.name
     ButtonElement.setAttribute("id", buttonID)
-    ButtonElement.setAttribute("src", skinPath + "/" + button.image)
+    const buttonPath = upath.toUnix(upath.join(skinPath, button.image))
+    ButtonElement.setAttribute("src", buttonPath.toString())
     const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
     const vis = button.hasOwnProperty("range") ? "visibility:visible;" : "visibility:hidden;"
     ButtonElement.setAttribute("style", "position:fixed;left:" + button.x + "px;top:" + button.y + "px;" + vis + widthHeight)
@@ -144,7 +146,7 @@ function customSkin() {
       "openDirectory"
     ]
   })[0]
-  const jsonPath = path.join(dir, "skin.json")
+  const jsonPath = upath.toUnix(upath.join(dir, "skin.json"))
   if (!fs.existsSync(jsonPath)) {
     dialog.showErrorBox("Error Loading Custom Skin", "Can not find " + jsonPath)
   } else {
@@ -156,8 +158,8 @@ function customSkin() {
       const allowedConsoles = ["nes", "snes", "n64", "gcn", "sgb"]
       if (!skinJson.hasOwnProperty("console") || !allowedConsoles.includes(skinJson.console)) throw "missing/incorrect console"
       if (!skinJson.hasOwnProperty("background")) throw "missing background"
-      const background = skinJson.background
-      document.body.style.backgroundImage = "url(" + dir + "/" + background + ")"
+      const background = upath.toUnix(upath.join(dir, skinJson.background))
+      document.body.style.backgroundImage = "url(" + background + ")"
 
       // Resize window based on height/width in object.
       if (!skinJson.hasOwnProperty("width") || !skinJson.hasOwnProperty("height")) throw "missing height/width"
@@ -172,8 +174,9 @@ function customSkin() {
         const ButtonElement = document.createElement("img")
         const buttonID = button.name
         ButtonElement.setAttribute("id", buttonID)
-        if (!button.hasOwnProperty("image") || !fs.existsSync(dir + "/" + button.image)) throw "no image"
-        ButtonElement.setAttribute("src", dir + "/" + button.image)
+        if (!button.hasOwnProperty("image") || !fs.existsSync(upath.toUnix(upath.join(dir, button.image)))) throw "no image"
+        const buttonPath = upath.toUnix(upath.join(dir, button.image))
+        ButtonElement.setAttribute("src", buttonPath.toString())
         const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
         const vis = button.hasOwnProperty("range") ? "visibility:visible;" : "visibility:hidden;"
         if (!button.hasOwnProperty("x") || !button.hasOwnProperty("y")) throw "missing x/y coordinates for " + button.name
