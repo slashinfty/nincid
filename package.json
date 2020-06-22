@@ -8,9 +8,9 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder -wl",
+    "build-linux": "electron-builder -l",
     "build-mac": "electron-builder -m",
-    "build-win-only": "electron-builder -w"
+    "build-win": "electron-builder -w"
   },
   "devDependencies": {
     "electron": "^9.0.3",
