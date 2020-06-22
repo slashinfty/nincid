@@ -32,7 +32,7 @@ function createWindow () {
   })
 
   // Uncomment next line to enable dev tools.
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 }
 
 app.allowRendererProcessReuse = false
