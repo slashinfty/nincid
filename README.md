@@ -8,10 +8,10 @@ Source code for NinCID is available on <a href="https://github.com/slashinfty/ni
 
 Current Version: 0.2.2
 
-<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID_Setup_0.2.1.exe">Windows (.exe)</a><br>
-<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.2.1.dmg">Mac (.dmg)</a><br>
-<a href="https://github.com/slashinfty/nincid/releases/latest/download/nincid_0.2.1_amd64.deb">Linux (.deb)</a><br>
-<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.2.1.AppImage">Linux (.AppImage)</a>
+<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID_Setup_0.2.2.exe">Windows (.exe)</a><br>
+<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.2.2.dmg">Mac (.dmg)</a><br>
+<a href="https://github.com/slashinfty/nincid/releases/latest/download/nincid_0.2.2_amd64.deb">Linux (.deb)</a><br>
+<a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.2.2.AppImage">Linux (.AppImage)</a>
 
 Note: when launching the .AppImage, add the option `--no-sandbox`
 
