@@ -15,7 +15,7 @@ function createWindow () {
       height: 300,
       width: 650,
       maximizable: false,
-      resizable: false,
+      resizable: true, // Until setBounds works correctly
       backgroundColor: '#000'
   })
 

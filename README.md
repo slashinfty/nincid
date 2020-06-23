@@ -6,7 +6,7 @@ Source code for NinCID is available on <a href="https://github.com/slashinfty/ni
 
 ## Releases
 
-Current Version: 0.2.1
+Current Version: 0.2.2
 
 <a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID_Setup_0.2.1.exe">Windows (.exe)</a><br>
 <a href="https://github.com/slashinfty/nincid/releases/latest/download/NinCID-0.2.1.dmg">Mac (.dmg)</a><br>
