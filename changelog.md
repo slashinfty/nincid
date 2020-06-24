@@ -1,8 +1,12 @@
 # Changelog
 
+## v0.2.3 (24 June 2020)
+
+Reverting resizability from v0.2.2 thanks to `win.setContentBounds()` correctly resizing the window to match the background.
+
 ## v0.2.2 (22 June 2020)
 
-Changed `BrowserWindow` resizability from `false` to `true` as a temporary solution to Windows and Mac not resizing the screen to match the background.
+Changed `BrowserWindow` resizability from `false` to `true` as a temporary solution to Windows and Mac not resizing the window to match the background.
 
 ## v0.2.1 (22 June 2020)
 
