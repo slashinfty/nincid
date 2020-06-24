@@ -2,7 +2,7 @@
 
 ## v0.2.3 (24 June 2020)
 
-Reverting resizability from v0.2.2 thanks to `win.setContentBounds()` correctly resizing the window to match the background.
+Reverting resizability from v0.2.2 thanks to `win.setContentSize()` correctly resizing the window to match the background.
 
 ## v0.2.2 (22 June 2020)
 
