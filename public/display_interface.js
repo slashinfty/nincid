@@ -179,6 +179,7 @@ function customSkin() {
         ButtonElement.setAttribute("src", buttonPath.toString())
         const widthHeight = button.hasOwnProperty("width") ? "height:" + button.height + "px;width:" + button.width + "px;" : ""
         const vis = button.hasOwnProperty("range") ? "visibility:visible;" : "visibility:hidden;"
+        if (button.hasOwnProperty("range")) ButtonElement.dataset.range = button.range;
         if (!button.hasOwnProperty("x") || !button.hasOwnProperty("y")) throw "missing x/y coordinates for " + button.name
         ButtonElement.setAttribute("style", "position:fixed;left:" + button.x + "px;top:" + button.y + "px;" + vis + widthHeight)
         ButtonHolder.appendChild(ButtonElement)
@@ -214,7 +215,7 @@ function readPort(activePort, consoleName) {
     const el = document.getElementById(stick.stick)
     stick.left = parseInt(el.style.left)
     stick.top = parseInt(el.style.top)
-    stick.range = parseInt(skinJson.buttons.find(o => o.name === stick.stick).range)
+    stick.range = parseInt(el.dataset.range)
   })}
   
   // Functions for interpreting analog sticks.
