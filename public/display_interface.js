@@ -78,8 +78,8 @@ const consoleObject = [
       {"button": "left", "input": 15}
     ],
     "sticks": [
-      {"stick": "stick", "xinput": 16, "yinput": 24},
-      {"stick": "cstick", "xinput": 32, "yinput": 40}
+      {"stick": "stick", "xinput": 16, "yinput": 24, "range": 117},
+      {"stick": "cstick", "xinput": 32, "yinput": 40, "range": 71}
     ]
   },
   {
@@ -215,7 +215,6 @@ function readPort(activePort, consoleName) {
     const el = document.getElementById(stick.stick)
     stick.left = parseInt(el.style.left)
     stick.top = parseInt(el.style.top)
-    stick.range = parseInt(el.dataset.range)
   })}
   
   // Functions for interpreting analog sticks.

@@ -15,12 +15,13 @@
   "devDependencies": {
     "electron": "^9.4.0",
     "electron-builder": "^22.7.0",
-    "electron-rebuild": "^1.11.0"
+    "electron-rebuild": "3.2.5"
   },
   "dependencies": {
     "@types/serialport": "^8.0.1",
     "serialport": "^9.0.0",
-    "upath": "^1.2.0"
+    "upath": "^1.2.0",
+    "yarn": "^1.22.17"
   },
   "build": {
     "appId": "com.electron.nincid",
