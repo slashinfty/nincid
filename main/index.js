@@ -24,7 +24,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   win.loadFile('./public/index.html')
-
+  win.webContents.openDevTools()
   // Links open in native browser.
   win.webContents.on('new-window', (event, url) => {
     event.preventDefault()

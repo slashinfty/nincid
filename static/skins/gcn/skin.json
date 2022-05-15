@@ -114,15 +114,15 @@
         {
             "name": "stick",
             "image": "stick.png",
-            "x": "117",
-            "y": "137",
+            "x": "124",
+            "y": "149",
             "range": "40"
         },
         {
             "name": "cstick",
             "image": "c-stick.png",
-            "x": "541",
-            "y": "291",
+            "x": "543",
+            "y": "300",
             "range": "30"
         }
     ]
